@@ -1,0 +1,51 @@
+# Problem 1: Number Theory Foundations
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+def phi(n):
+    count = 0
+    for i in range(1, n + 1):
+        if gcd(i, n) == 1:
+            count += 1
+    return count
+# Input
+a = int(input("Enter first number: "))
+b = int(input("Enter second number: "))
+# Prime check
+print("Is", a, "prime?", is_prime(a))
+print("Is", b, "prime?", is_prime(b))
+# GCD
+g = gcd(a, b)
+print("GCD:", g)
+# Co-prime
+if g == 1:
+    print("Numbers are Co-Prime")
+else:
+    print("Numbers are NOT Co-Prime")
+# Euler Phi
+phi_a = phi(a)
+phi_b = phi(b)
+print("Phi(", a, ") =", phi_a)
+print("Phi(", b, ") =", phi_b)
+# Fermat's Little Theorem (only if b is prime)
+if is_prime(b):
+    print("Fermat Test:", pow(a, b-1, b))
+else:
+    print("Fermat Test not applicable (b is not prime)")
+# Euler's Theorem (if co-prime)
+if g == 1:
+    print("Euler Test:", pow(a, phi_b, b))
+else:
+    print("Euler Test not applicable (not co-prime)")
+# Modular Arithmetic
+print("Mod Addition:", (a + b) % b)
+print("Mod Multiplication:", (a * b) % b)
+print("Mod Exponentiation:", pow(a, b, b))
